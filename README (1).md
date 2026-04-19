@@ -64,7 +64,7 @@ Currently upskilling in **Azure, Python, and dbt** to move into modern cloud dat
 
 - 📧 pavancheri024@gmail.com
 - 📞 +91-8050161714
-- 💼 [LinkedIn](https://linkedin.com/in/pavancheri)
+- 💼 [LinkedIn](https://linkedin.com/in/pavan-cheri-a07537404)
 - 🌐 [Portfolio](https://github.com/pavan-cheri/pavancheri.github.io)
 
 ---
