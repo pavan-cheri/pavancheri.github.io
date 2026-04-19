@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavan Cheri — Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1A56A0;
+    --blue-light: #E8F0FA;
+    --blue-mid: #3B7DD8;
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --dark: #0F1623;
+    --mid: #2D3748;
+    --muted: #64748B;
+    --border: #E2E8F0;
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+    --amber: #B45309;
+    --amber-light: #FEF3C7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(248,250,252,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--dark);
+    letter-spacing: -0.3px;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta {
+    background: var(--blue);
+    color: white !important;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px !important;
+    text-decoration: none;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #1044880 !important; }
+
+  /* HERO */
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--dark);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 span { color: var(--blue); }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { background: #144080; transform: translateY(-1px); }
+  .btn-outline {
+    background: white;
+    color: var(--mid);
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.1s;
+  }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+
+  .avatar-wrap {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: white;
+    flex-shrink: 0;
+    border: 4px solid white;
+    box-shadow: 0 0 0 2px var(--blue-light);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: white;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .stat-lbl {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+  }
+  .section + .section { padding-top: 0; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .about-text {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+  .about-text p + p { margin-top: 1rem; }
+  .info-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-lbl { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .info-val { font-size: 13px; color: var(--mid); font-weight: 500; }
+  .info-val a { color: var(--blue); text-decoration: none; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .skill-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .skill-cat {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .skill-name { font-size: 13px; color: var(--mid); font-weight: 500; }
+  .skill-bar-wrap { width: 100px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; border-radius: 2px; background: var(--blue); transition: width 1s ease; }
+  .skill-bar-fill.learning { background: var(--green); }
+  .skill-tag {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .skill-tag.learning { background: var(--green-light); color: var(--green); }
+  .skill-tag.planned { background: var(--amber-light); color: var(--amber); }
+
+  /* PROJECT */
+  .project-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .project-header {
+    background: var(--blue);
+    padding: 1.75rem 2rem;
+    color: white;
+  }
+  .project-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .project-header .client {
+    font-size: 13px;
+    opacity: 0.8;
+    font-family: 'DM Mono', monospace;
+  }
+  .project-body { padding: 1.75rem 2rem; }
+  .project-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .resp-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .resp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .resp-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+  .resp-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .tech-pill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--mid);
+    font-size: 12px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 2rem; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -26px; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .tl-item.edu::before { background: var(--muted); box-shadow: 0 0 0 2px var(--muted); }
+  .tl-title { font-size: 15px; font-weight: 500; color: var(--dark); }
+  .tl-org { font-size: 13px; color: var(--blue); margin: 2px 0; }
+  .tl-date {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 6px;
+  }
+  .tl-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* LEARNING */
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .learn-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .learn-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.75rem;
+    font-size: 18px;
+  }
+  .learn-name { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 4px; }
+  .learn-sub { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .learn-progress {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .learn-progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--green);
+  }
+
+  /* CONTACT */
+  .contact-card {
+    background: var(--dark);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    color: white;
+  }
+  .contact-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    margin-bottom: 0.75rem;
+    color: white;
+  }
+  .contact-card p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .contact-link {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.18); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; }
+    .avatar-wrap { display: none; }
+    .hero h1 { font-size: 32px; }
+    .stats-inner { grid-template-columns: repeat(2,1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .resp-grid { grid-template-columns: 1fr; }
+    .learning-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Pavan Cheri</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#project">Project</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-tag">Open to Data Engineer roles</div>
+    <h1>Hi, I'm <span>Pavan</span>.<br>I build data pipelines.</h1>
+    <p class="hero-sub">SQL Server & MSBI Developer with 4.3 years delivering ETL solutions in US healthcare at Cognizant. Now moving into modern cloud data engineering.</p>
+    <div class="hero-btns">
+      <a href="mailto:pavancheri024@gmail.com" class="btn-primary">Get in touch</a>
+      <a href="https://linkedin.com/in/pavancheri" target="_blank" class="btn-outline">LinkedIn profile</a>
+      <a href="https://github.com/pavan-cheri/pavancheri.github.io" target="_blank" class="btn-outline">GitHub repo</a>
+      <a href="https://github.com/pavan-cheri/pavancheri.github.io" class="btn-outline">Download resume</a>
+    </div>
+  </div>
+  <div class="avatar-wrap">PC</div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">4.3</div>
+      <div class="stat-lbl">Years experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-lbl">US clients served</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-lbl">SSIS pipelines built</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-lbl">Domain: healthcare</div>
+    </div>
+  </div>
+</div>
+
+<section class="section fade-in" id="about">
+  <div class="section-label">// about me</div>
+  <div class="section-title">Who I am</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a SQL Server & MSBI Developer currently working as Programmer Analyst at Cognizant, delivering data solutions for US healthcare clients — TMG and HCSC — on the TriZetto Encounter Data Manager platform.</p>
+      <p>Over 4.3 years I've designed complex ETL pipelines using SSIS, optimized stored procedures for large-scale claims data, and built SSRS reports used by business stakeholders across the US. Healthcare data is unforgiving — accuracy directly impacts Medicare and Medicaid revenue — and that discipline shapes everything I build.</p>
+      <p>I'm now actively transitioning into modern cloud-based data engineering, learning Azure Data Factory, Python, and dbt to bring the same rigor I've built in on-premise environments into the cloud era.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-row">
+        <span class="info-lbl">Location</span>
+        <span class="info-val">Bengaluru, India</span>
+      </div>
+      <div class="info-row">
+        <span class="info-lbl">Company</span>
+        <span class="info-val">Cognizant Technology Solutions</span>
+      </div>
+      <div class="info-row">
+        <span class="info-lbl">Role</span>
+        <span class="info-val">Programmer Analyst</span>
+      </div>
+      <div class="info-row">
+        <span class="info-lbl">Domain</span>
+        <span class="info-val">Healthcare (US — Medicare/Medicaid)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-lbl">Email</span>
+        <span class="info-val"><a href="mailto:pavancheri024@gmail.com">pavancheri024@gmail.com</a></span>
+      </div>
+      <div class="info-row">
+        <span class="info-lbl">Phone</span>
+        <span class="info-val">+91-8050161714</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in" id="skills">
+  <div class="section-label">// technical skills</div>
+  <div class="section-title">What I work with</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Core skills</div>
+      <div class="skill-item">
+        <span class="skill-name">MS SQL Server</span>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">SSIS / ETL Pipelines</span>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">T-SQL / Stored Procedures</span>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Query Optimization</span>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">SSRS Reporting</span>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Power BI</span>
+        <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:55%"></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Cloud & modern stack (learning)</div>
+      <div class="skill-item">
+        <span class="skill-name">Azure Data Factory</span>
+        <span class="skill-tag learning">In progress</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Python for data</span>
+        <span class="skill-tag learning">In progress</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">dbt Core</span>
+        <span class="skill-tag planned">Planned</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Apache Airflow</span>
+        <span class="skill-tag planned">Planned</span>
+      </div>
+      <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--border)">
+        <div class="skill-cat" style="margin-bottom:0.5rem">Other</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="skill-tag">Visual Studio</span>
+          <span class="skill-tag">SSMS</span>
+          <span class="skill-tag">VSS</span>
+          <span class="skill-tag">XML</span>
+          <span class="skill-tag">Windows / Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in" id="project">
+  <div class="section-label">// featured project</div>
+  <div class="section-title">Project I've worked on</div>
+  <div class="project-card">
+    <div class="project-header">
+      <h3>TriZetto Encounter Data Manager</h3>
+      <div class="client">Client: TMG & HCSC (USA) &nbsp;·&nbsp; Feb 2022 – Present &nbsp;·&nbsp; Team of 10</div>
+    </div>
+    <div class="project-body">
+      <p class="project-desc">A mission-critical healthcare claims management platform used by major US insurance plans to generate, edit, and submit Medicare & Medicaid encounter files to CMS and state Medicaid agencies. Works across core claims processing systems, data warehouses, and chart review sources to maximize revenue accuracy.</p>
+      <div class="resp-title">Key responsibilities</div>
+      <div class="resp-grid">
+        <div class="resp-item"><div class="resp-dot"></div>Designed complex Stored Procedures, Triggers, Functions & Views for large-scale claims data</div>
+        <div class="resp-item"><div class="resp-dot"></div>Built end-to-end SSIS ETL packages — from development through production deployment</div>
+        <div class="resp-item"><div class="resp-dot"></div>Applied advanced SSIS transformations: SCD, Lookup, Conditional Split, Aggregate</div>
+        <div class="resp-item"><div class="resp-dot"></div>Tuned slow queries using SQL Server Profiler & Database Tuning Advisor</div>
+        <div class="resp-item"><div class="resp-dot"></div>Developed SSRS reports: Drill Down, Drill Through, Cascading Parameters, Sub Reports</div>
+        <div class="resp-item"><div class="resp-dot"></div>Resolved Live Site production defects within SLA in regulated healthcare environment</div>
+        <div class="resp-item"><div class="resp-dot"></div>Conducted code reviews for database objects across the team</div>
+        <div class="resp-item"><div class="resp-dot"></div>Managed DB admin: backup/restore, job scheduling, maintenance plans</div>
+      </div>
+      <div class="tech-pills">
+        <span class="tech-pill">MS SQL Server 2012/2017/2019</span>
+        <span class="tech-pill">SSIS</span>
+        <span class="tech-pill">SSRS</span>
+        <span class="tech-pill">T-SQL</span>
+        <span class="tech-pill">SSMS</span>
+        <span class="tech-pill">Visual Studio</span>
+        <span class="tech-pill">Healthcare / CMS</span>
+        <span class="tech-pill">Medicare / Medicaid</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in" id="experience">
+  <div class="section-label">// experience & education</div>
+  <div class="section-title">My journey</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-title">Programmer Analyst</div>
+      <div class="tl-org">Cognizant Technology Solutions</div>
+      <div class="tl-date">Feb 2022 – Present &nbsp;·&nbsp; Healthcare Domain</div>
+      <div class="tl-desc">Delivering ETL pipelines, SQL optimization, and SSRS reporting for US healthcare clients TMG & HCSC on the TriZetto platform.</div>
+    </div>
+    <div class="tl-item edu">
+      <div class="tl-title">Bachelor of Technology (B.Tech)</div>
+      <div class="tl-org" style="color:var(--muted)">Jawaharlal Nehru Technological University, Anantapur</div>
+      <div class="tl-date">Computer Science / Engineering</div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in">
+  <div class="section-label">// currently learning</div>
+  <div class="section-title">Upskilling roadmap</div>
+  <div class="learning-grid">
+    <div class="learn-card">
+      <div class="learn-icon" style="background:#E8F0FA">☁</div>
+      <div class="learn-name">Microsoft Azure</div>
+      <div class="learn-sub">AZ-900 Fundamentals · in progress</div>
+      <div class="learn-progress"><div class="learn-progress-fill" style="width:35%"></div></div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon" style="background:#E1F5EE">🐍</div>
+      <div class="learn-name">Python for data</div>
+      <div class="learn-sub">Coursera · data pipelines · in progress</div>
+      <div class="learn-progress"><div class="learn-progress-fill" style="width:25%"></div></div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon" style="background:#FEF3C7">⚙</div>
+      <div class="learn-name">dbt Core</div>
+      <div class="learn-sub">Analytics engineering · planned</div>
+      <div class="learn-progress"><div class="learn-progress-fill" style="width:5%; background:#B45309"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in" id="contact">
+  <div class="contact-card">
+    <h3>Let's connect</h3>
+    <p>Open to Data Engineer roles — remote or Bengaluru. Always happy to talk data pipelines, ETL, or healthcare tech.</p>
+    <div class="contact-links">
+      <a href="mailto:pavancheri024@gmail.com" class="contact-link">pavancheri024@gmail.com</a>
+      <a href="tel:+918050161714" class="contact-link">+91-8050161714</a>
+      <a href="https://linkedin.com/in/pavancheri" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://github.com/pavan-cheri/pavancheri.github.io" target="_blank" class="contact-link">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built by Pavan Cheri &nbsp;·&nbsp; SQL Server & Data Engineer &nbsp;·&nbsp; Bengaluru, India
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
